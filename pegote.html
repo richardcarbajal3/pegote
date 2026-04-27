@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PEGOTE — Stickers con gracia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4ead2;
+    --paper-2:#ecdfb8;
+    --ink:#1a1410;
+    --tomato:#e63946;
+    --mustard:#f4a261;
+    --blue:#264e8a;
+    --pink:#ff3d8b;
+    --mint:#06b894;
+    --violet:#7e3bff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:'Fraunces',serif;
+    background:var(--paper);
+    color:var(--ink);
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(126,59,255,0.05) 0, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(230,57,70,0.05) 0, transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.18 0'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");
+  }
+
+  /* === MARQUEE === */
+  .marquee{
+    background:var(--ink);
+    color:var(--paper);
+    overflow:hidden;
+    border-bottom:3px solid var(--ink);
+    padding:0.7rem 0;
+    font-family:'Bungee',sans-serif;
+    font-size:0.95rem;
+    letter-spacing:0.1em;
+  }
+  .marquee-track{
+    display:inline-flex;
+    gap:2.5rem;
+    animation:scroll 30s linear infinite;
+    white-space:nowrap;
+  }
+  .marquee span{display:inline-flex;align-items:center;gap:1rem}
+  .marquee i{
+    display:inline-block;width:10px;height:10px;
+    background:var(--tomato);border-radius:50%;
+  }
+  .marquee i:nth-child(2n){background:var(--mustard)}
+  .marquee i:nth-child(3n){background:var(--mint)}
+  .marquee i:nth-child(4n){background:var(--pink)}
+  @keyframes scroll{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+  }
+
+  /* === NAV === */
+  nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.5rem 3rem;
+    border-bottom:2px solid var(--ink);
+    background:var(--paper);
+    position:sticky;top:0;z-index:50;
+  }
+  .logo{
+    font-family:'Bungee',sans-serif;
+    font-size:1.6rem;
+    letter-spacing:-0.02em;
+    display:flex;align-items:center;gap:0.5rem;
+  }
+  .logo-dot{
+    width:18px;height:18px;background:var(--tomato);border-radius:50%;
+    border:2px solid var(--ink);
+    transform:rotate(-12deg);
+  }
+  .nav-links{display:flex;gap:2rem;font-family:'DM Mono',monospace;font-size:0.85rem;font-weight:500;text-transform:uppercase;letter-spacing:0.08em}
+  .nav-links a{color:var(--ink);text-decoration:none;position:relative;padding-bottom:2px}
+  .nav-links a:hover{color:var(--tomato)}
+  .nav-cta{
+    background:var(--ink);color:var(--paper);
+    padding:0.7rem 1.4rem;
+    font-family:'Bungee',sans-serif;font-size:0.85rem;
+    border:2px solid var(--ink);
+    text-decoration:none;
+    transition:all 0.2s;
+    box-shadow:4px 4px 0 var(--tomato);
+  }
+  .nav-cta:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--tomato)}
+
+  /* === HERO === */
+  .hero{
+    position:relative;
+    padding:6rem 3rem 8rem;
+    min-height:90vh;
+    display:flex;flex-direction:column;justify-content:center;
+    overflow:hidden;
+  }
+  .hero-eyebrow{
+    font-family:'DM Mono',monospace;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:0.2em;
+    margin-bottom:2rem;
+    display:flex;align-items:center;gap:0.8rem;
+  }
+  .hero-eyebrow::before{
+    content:"";width:40px;height:2px;background:var(--ink);
+  }
+  .hero h1{
+    font-family:'Bungee',sans-serif;
+    font-size:clamp(4rem,14vw,11rem);
+    line-height:0.85;
+    letter-spacing:-0.04em;
+    color:var(--ink);
+    margin-bottom:1rem;
+    position:relative;
+    z-index:2;
+  }
+  .hero h1 .pe{color:var(--tomato);display:inline-block;transform:rotate(-3deg)}
+  .hero h1 .go{color:var(--blue);display:inline-block}
+  .hero h1 .te{color:var(--mustard);display:inline-block;transform:rotate(2deg)}
+  .hero-sub{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:clamp(1.2rem,2.2vw,1.7rem);
+    max-width:620px;
+    margin-top:2rem;
+    margin-bottom:3rem;
+    line-height:1.4;
+    font-weight:400;
+    position:relative;z-index:2;
+  }
+  .hero-sub strong{font-weight:900;font-style:normal;background:var(--mustard);padding:0 0.3em;border:2px solid var(--ink);display:inline-block;transform:rotate(-1deg)}
+  .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;position:relative;z-index:2}
+  .btn{
+    font-family:'Bungee',sans-serif;
+    padding:1.1rem 2rem;
+    font-size:1rem;
+    text-decoration:none;
+    border:2px solid var(--ink);
+    transition:all 0.15s;
+    display:inline-flex;align-items:center;gap:0.6rem;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--tomato);color:var(--paper);box-shadow:6px 6px 0 var(--ink)}
+  .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+  .btn-secondary{background:var(--paper);color:var(--ink);box-shadow:6px 6px 0 var(--blue)}
+  .btn-secondary:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--blue)}
+
+  /* Floating stickers in hero */
+  .float-sticker{
+    position:absolute;
+    z-index:1;
+    transition:transform 0.4s cubic-bezier(.34,1.56,.64,1);
+    filter:drop-shadow(4px 6px 0 rgba(26,20,16,0.9));
+  }
+  .float-sticker:hover{transform:scale(1.15) rotate(var(--rot, 0deg))}
+  .fs-1{top:8%;right:6%;width:170px;--rot:18deg;transform:rotate(18deg);animation:bob 4s ease-in-out infinite}
+  .fs-2{top:55%;right:14%;width:130px;--rot:-12deg;transform:rotate(-12deg);animation:bob 5s ease-in-out infinite 0.5s}
+  .fs-3{top:25%;right:22%;width:100px;--rot:25deg;transform:rotate(25deg);animation:bob 6s ease-in-out infinite 1s}
+  .fs-4{bottom:8%;right:38%;width:90px;--rot:-20deg;transform:rotate(-20deg);animation:bob 4.5s ease-in-out infinite 1.5s}
+  @keyframes bob{
+    0%,100%{transform:rotate(var(--rot)) translateY(0)}
+    50%{transform:rotate(var(--rot)) translateY(-12px)}
+  }
+
+  /* === STATS BAR === */
+  .stats{
+    background:var(--ink);
+    color:var(--paper);
+    padding:2rem 3rem;
+    display:flex;justify-content:space-around;gap:2rem;
+    flex-wrap:wrap;
+    border-top:2px solid var(--ink);
+    border-bottom:2px solid var(--ink);
+  }
+  .stat{display:flex;flex-direction:column;align-items:center}
+  .stat-num{font-family:'Bungee',sans-serif;font-size:2.5rem;color:var(--mustard)}
+  .stat-num:nth-child(1){color:var(--mustard)}
+  .stat:nth-child(2) .stat-num{color:var(--tomato)}
+  .stat:nth-child(3) .stat-num{color:var(--mint)}
+  .stat:nth-child(4) .stat-num{color:var(--pink)}
+  .stat-label{font-family:'DM Mono',monospace;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-top:0.4rem}
+
+  /* === GALLERY === */
+  .section{padding:6rem 3rem;position:relative}
+  .section-header{
+    margin-bottom:4rem;
+    display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;
+  }
+  .section-tag{
+    font-family:'DM Mono',monospace;font-size:0.8rem;
+    text-transform:uppercase;letter-spacing:0.2em;
+    background:var(--ink);color:var(--paper);
+    padding:0.4rem 0.8rem;display:inline-block;
+    margin-bottom:1rem;
+    transform:rotate(-2deg);
+  }
+  .section h2{
+    font-family:'Bungee',sans-serif;
+    font-size:clamp(2.5rem,6vw,5rem);
+    line-height:0.9;
+    letter-spacing:-0.03em;
+    max-width:800px;
+  }
+  .section h2 em{font-style:normal;color:var(--tomato);position:relative;display:inline-block}
+  .section h2 em::after{
+    content:"";position:absolute;
+    left:-4%;right:-4%;bottom:6%;height:14%;
+    background:var(--mustard);z-index:-1;
+    transform:skew(-10deg);
+  }
+  .section-desc{
+    font-family:'Fraunces',serif;
+    font-size:1.15rem;
+    max-width:380px;
+    line-height:1.5;
+    font-style:italic;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+    gap:2rem;
+  }
+  .sticker-card{
+    background:var(--paper-2);
+    border:2px solid var(--ink);
+    padding:1.5rem;
+    position:relative;
+    transition:all 0.3s cubic-bezier(.34,1.56,.64,1);
+    box-shadow:6px 6px 0 var(--ink);
+    cursor:pointer;
+  }
+  .sticker-card:nth-child(2n){background:#fff5e1;transform:rotate(1deg)}
+  .sticker-card:nth-child(3n){background:#ffe7e3;transform:rotate(-1deg)}
+  .sticker-card:nth-child(5n){background:#e3f2e9;transform:rotate(0.5deg)}
+  .sticker-card:hover{
+    transform:rotate(0) translate(-4px,-4px) scale(1.03);
+    box-shadow:10px 10px 0 var(--tomato);
+    z-index:10;
+  }
+  .sticker-art{
+    background:var(--paper);
+    border:2px dashed var(--ink);
+    padding:1.5rem;
+    aspect-ratio:1;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:1rem;
+  }
+  .sticker-art svg{width:100%;height:100%}
+  .sticker-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.7rem}
+  .sticker-name{font-family:'Bungee',sans-serif;font-size:1.05rem;line-height:1}
+  .sticker-price{
+    font-family:'Bungee',sans-serif;font-size:0.9rem;
+    background:var(--ink);color:var(--paper);
+    padding:0.3rem 0.6rem;
+    transform:rotate(3deg);
+    white-space:nowrap;
+  }
+  .sticker-artist{
+    font-family:'DM Mono',monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:#5a5048;
+  }
+  .sticker-artist::before{content:"@ "}
+
+  /* === HOW IT WORKS === */
+  .how{
+    background:var(--ink);
+    color:var(--paper);
+    padding:6rem 3rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .how::before{
+    content:"";position:absolute;top:-30px;left:0;right:0;height:60px;
+    background:var(--paper);
+    clip-path:polygon(0 100%,5% 0,10% 100%,15% 0,20% 100%,25% 0,30% 100%,35% 0,40% 100%,45% 0,50% 100%,55% 0,60% 100%,65% 0,70% 100%,75% 0,80% 100%,85% 0,90% 100%,95% 0,100% 100%);
+  }
+  .how h2 em::after{background:var(--violet)}
+  .how-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:3rem;
+    margin-top:4rem;
+  }
+  .step{position:relative}
+  .step-num{
+    font-family:'Bungee',sans-serif;
+    font-size:5rem;
+    line-height:1;
+    color:var(--mustard);
+    margin-bottom:1rem;
+    display:inline-block;
+  }
+  .step:nth-child(2) .step-num{color:var(--mint)}
+  .step:nth-child(3) .step-num{color:var(--pink)}
+  .step h3{
+    font-family:'Bungee',sans-serif;
+    font-size:1.5rem;
+    margin-bottom:0.8rem;
+  }
+  .step p{
+    font-family:'Fraunces',serif;
+    font-size:1.05rem;
+    line-height:1.5;
+    opacity:0.9;
+  }
+
+  /* === ARTIST CTA === */
+  .artist-cta{
+    padding:6rem 3rem;
+    background:var(--mustard);
+    border-top:2px solid var(--ink);
+    border-bottom:2px solid var(--ink);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .artist-cta h2{
+    font-family:'Bungee',sans-serif;
+    font-size:clamp(2.5rem,7vw,6rem);
+    line-height:0.9;
+    margin-bottom:1.5rem;
+    max-width:none;
+  }
+  .artist-cta p{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:1.3rem;
+    max-width:600px;
+    margin:0 auto 2.5rem;
+    line-height:1.4;
+  }
+  .artist-cta .btn-primary{background:var(--ink);color:var(--paper);font-size:1.1rem;padding:1.2rem 2.5rem}
+  .artist-cta .btn-primary:hover{box-shadow:8px 8px 0 var(--tomato)}
+  .ac-sticker{position:absolute;opacity:0.9}
+  .ac-1{top:15%;left:8%;width:90px;transform:rotate(-15deg)}
+  .ac-2{bottom:20%;right:10%;width:110px;transform:rotate(20deg)}
+
+  /* === FOOTER === */
+  footer{
+    background:var(--ink);
+    color:var(--paper);
+    padding:4rem 3rem 2rem;
+  }
+  .foot-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:3rem;
+    margin-bottom:3rem;
+  }
+  .foot-brand{font-family:'Bungee',sans-serif;font-size:2rem;margin-bottom:1rem}
+  .foot-tag{font-family:'Fraunces',serif;font-style:italic;opacity:0.7;line-height:1.5}
+  .foot-col h4{font-family:'Bungee',sans-serif;font-size:0.9rem;margin-bottom:1rem;color:var(--mustard)}
+  .foot-col a{
+    display:block;
+    color:var(--paper);
+    text-decoration:none;
+    font-family:'DM Mono',monospace;font-size:0.85rem;
+    margin-bottom:0.5rem;
+    opacity:0.85;
+  }
+  .foot-col a:hover{opacity:1;color:var(--tomato)}
+  .foot-bottom{
+    border-top:1px solid rgba(244,234,210,0.2);
+    padding-top:2rem;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'DM Mono',monospace;font-size:0.8rem;opacity:0.6;
+    flex-wrap:wrap;gap:1rem;
+  }
+
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem}
+    .nav-links{display:none}
+    .hero,.section,.how,.artist-cta,footer{padding-left:1.5rem;padding-right:1.5rem}
+    .fs-1,.fs-2,.fs-3,.fs-4{display:none}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:2rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>STICKERS CON GRACIA <i></i></span>
+    <span>ARTE PEGADO <i></i></span>
+    <span>+200 ARTISTAS <i></i></span>
+    <span>DESCARGA INSTANTÁNEA <i></i></span>
+    <span>ENVÍO A TODO EL PERÚ <i></i></span>
+    <span>STICKERS CON GRACIA <i></i></span>
+    <span>ARTE PEGADO <i></i></span>
+    <span>+200 ARTISTAS <i></i></span>
+    <span>DESCARGA INSTANTÁNEA <i></i></span>
+    <span>ENVÍO A TODO EL PERÚ <i></i></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><span class="logo-dot"></span>PEGOTE</div>
+  <div class="nav-links">
+    <a href="#galeria">Galería</a>
+    <a href="#artistas">Artistas</a>
+    <a href="#como">Cómo funciona</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="#vender" class="nav-cta">Vender →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">MARKETPLACE DE STICKERS · LIMA, PE</div>
+  <h1><span class="pe">PE</span><span class="go">GO</span><span class="te">TE</span></h1>
+
+  <!-- Floating stickers -->
+  <svg class="float-sticker fs-1" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="85" fill="#ff3d8b" stroke="#1a1410" stroke-width="6"/>
+    <circle cx="75" cy="90" r="10" fill="#1a1410"/>
+    <circle cx="125" cy="90" r="10" fill="#1a1410"/>
+    <path d="M 60 130 Q 100 165 140 130" fill="none" stroke="#1a1410" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="60" cy="115" r="8" fill="#e63946"/>
+    <circle cx="140" cy="115" r="8" fill="#e63946"/>
+  </svg>
+
+  <svg class="float-sticker fs-2" viewBox="0 0 200 200">
+    <path d="M 50 50 L 150 50 L 150 130 Q 150 160 120 160 L 80 160 Q 50 160 50 130 Z" fill="#06b894" stroke="#1a1410" stroke-width="6"/>
+    <circle cx="80" cy="90" r="8" fill="#1a1410"/>
+    <circle cx="120" cy="90" r="8" fill="#1a1410"/>
+    <path d="M 70 120 L 130 120 L 130 135 Q 100 145 70 135 Z" fill="#1a1410"/>
+    <rect x="90" y="125" width="20" height="10" fill="#fff"/>
+  </svg>
+
+  <svg class="float-sticker fs-3" viewBox="0 0 200 200">
+    <polygon points="100,20 120,75 180,80 135,120 150,180 100,150 50,180 65,120 20,80 80,75" fill="#f4a261" stroke="#1a1410" stroke-width="6" stroke-linejoin="round"/>
+    <circle cx="85" cy="95" r="6" fill="#1a1410"/>
+    <circle cx="115" cy="95" r="6" fill="#1a1410"/>
+    <path d="M 80 115 Q 100 130 120 115" fill="none" stroke="#1a1410" stroke-width="5" stroke-linecap="round"/>
+  </svg>
+
+  <svg class="float-sticker fs-4" viewBox="0 0 200 200">
+    <ellipse cx="100" cy="100" rx="80" ry="85" fill="#7e3bff" stroke="#1a1410" stroke-width="6"/>
+    <ellipse cx="80" cy="90" rx="6" ry="12" fill="#fff"/>
+    <ellipse cx="120" cy="90" rx="6" ry="12" fill="#fff"/>
+    <path d="M 70 130 Q 100 110 130 130" fill="none" stroke="#1a1410" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 90 145 L 100 165 L 110 145 Z" fill="#e63946" stroke="#1a1410" stroke-width="4"/>
+  </svg>
+
+  <p class="hero-sub">
+    Arte ilustrado por artistas peruanos con un <strong>toque payaso</strong>.
+    Tú lo encuentras, tú te lo pegas. Cada descarga apoya a un artista real.
+  </p>
+  <div class="hero-ctas">
+    <a href="#galeria" class="btn btn-primary">Ver stickers →</a>
+    <a href="#vender" class="btn btn-secondary">Soy artista</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">237</div><div class="stat-label">Artistas</div></div>
+  <div class="stat"><div class="stat-num">1.4K</div><div class="stat-label">Stickers</div></div>
+  <div class="stat"><div class="stat-num">12K</div><div class="stat-label">Descargas</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Original</div></div>
+</div>
+
+<!-- GALLERY -->
+<section class="section" id="galeria">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">★ Lo más pegado</span>
+      <h2>Stickers <em>chistosos</em><br>que sí valen la pena.</h2>
+    </div>
+    <p class="section-desc">
+      Curado a mano por nosotros. Cada sticker es de un artista verificado y la autoría sigue siendo suya.
+    </p>
+  </div>
+
+  <div class="grid">
+    <!-- Card 1: Payaso triste -->
+    <div class="sticker-card">
+      <div class="sticker-art">
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="105" r="75" fill="#fff" stroke="#1a1410" stroke-width="5"/>
+          <path d="M 30 80 Q 50 30 100 50 Q 150 30 170 80" fill="#e63946" stroke="#1a1410" stroke-width="5" stroke-linejoin="round"/>
+          <circle cx="80" cy="95" r="8" fill="#1a1410"/>
+          <circle cx="120" cy="95" r="8" fill="#1a1410"/>
+          <circle cx="100" cy="120" r="14" fill="#e63946" stroke="#1a1410" stroke-width="4"/>
+          <path d="M 70 150 Q 100 135 130 150" fill="none" stroke="#1a1410" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 75 75 L 85 70 M 115 70 L 125 75" stroke="#1a1410" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="80" cy="105" r="3" fill="#264e8a"/>
+          <circle cx="120" cy="105" r="3" fill="#264e8a"/>
+        </svg>
+      </div>
+      <div class="sticker-meta">
+        <div class="sticker-name">PAYASO TRISTE</div>
+        <div class="sticker-price">S/ 8</div>
+      </div>
+      <div class="sticker-artist">milagros.draws</div>
+    </div>
+
+    <!-- Card 2: Sol con actitud -->
+    <div class="sticker-card">
+      <div class="sticker-art">
+        <svg viewBox="0 0 200 200">
+          <g>
+            <polygon points="100,20 105,40 95,40" fill="#f4a261" stroke="#1a1410" stroke-width="3"/>
+            <polygon points="100,180 105,160 95,160" fill="#f4a261" stroke="#1a1410" stroke-width="3"/>
+            <polygon points="20,100 40,95 40,105" fill="#f4a261" stroke="#1a1410" stroke-width="3"/>
+            <polygon points="180,100 160,95 160,105" fill="#f4a261" stroke="#1a1410" stroke-width="3"/>
+            <polygon points="40,40 55,50 50,55" fill="#f4a261" stroke="#1a1410" stroke-width="3"/>
+            <polygon points="160,40 145,50 150,55" fill="#f4a261" stroke="#1a1410" stroke-width="3"/>
+            <polygon points="40,160 55,150 50,145" fill="#f4a261" stroke="#1a1410" stroke-width="3"/>
+            <polygon points="160,160 145,150 150,145" fill="#f4a261" stroke="#1a1410" stroke-width="3"/>
+          </g>
+          <circle cx="100" cy="100" r="55" fill="#f4a261" stroke="#1a1410" stroke-width="5"/>
+          <path d="M 75 90 L 90 90" stroke="#1a1410" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 110 90 L 125 90" stroke="#1a1410" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 80 115 Q 100 105 120 115" fill="none" stroke="#1a1410" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sticker-meta">
+        <div class="sticker-name">SOL ABURRIDO</div>
+        <div class="sticker-price">S/ 6</div>
+      </div>
+      <div class="sticker-artist">jorgevera.ux</div>
+    </div>
+
+    <!-- Card 3: Ojo flotante -->
+    <div class="sticker-card">
+      <div class="sticker-art">
+        <svg viewBox="0 0 200 200">
+          <ellipse cx="100" cy="100" rx="80" ry="55" fill="#fff" stroke="#1a1410" stroke-width="5"/>
+          <circle cx="100" cy="100" r="38" fill="#06b894" stroke="#1a1410" stroke-width="4"/>
+          <circle cx="100" cy="100" r="20" fill="#1a1410"/>
+          <circle cx="108" cy="92" r="6" fill="#fff"/>
+          <path d="M 30 80 Q 60 60 100 60" fill="none" stroke="#1a1410" stroke-width="3"/>
+          <path d="M 100 60 Q 140 60 170 80" fill="none" stroke="#1a1410" stroke-width="3"/>
+          <path d="M 50 50 L 60 65 M 80 40 L 85 60 M 120 40 L 115 60 M 150 50 L 140 65" stroke="#1a1410" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sticker-meta">
+        <div class="sticker-name">OJO METIDO</div>
+        <div class="sticker-price">S/ 7</div>
+      </div>
+      <div class="sticker-artist">kana.ilustra</div>
+    </div>
+
+    <!-- Card 4: Lengua afuera -->
+    <div class="sticker-card">
+      <div class="sticker-art">
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="95" r="70" fill="#f4a261" stroke="#1a1410" stroke-width="5"/>
+          <path d="M 65 80 L 80 90 M 80 80 L 65 90" stroke="#1a1410" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 120 80 L 135 90 M 135 80 L 120 90" stroke="#1a1410" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 60 115 Q 100 145 140 115 L 130 145 Q 100 165 70 145 Z" fill="#1a1410"/>
+          <path d="M 85 130 Q 100 155 115 145 L 115 165 Q 100 175 90 165 Z" fill="#ff3d8b" stroke="#1a1410" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="sticker-meta">
+        <div class="sticker-name">XP CARITA</div>
+        <div class="sticker-price">S/ 6</div>
+      </div>
+      <div class="sticker-artist">pacobravo</div>
+    </div>
+
+    <!-- Card 5: Fantasma fiestero -->
+    <div class="sticker-card">
+      <div class="sticker-art">
+        <svg viewBox="0 0 200 200">
+          <path d="M 50 90 Q 50 40 100 40 Q 150 40 150 90 L 150 165 L 130 150 L 110 165 L 90 150 L 70 165 L 50 150 Z" fill="#fff" stroke="#1a1410" stroke-width="5" stroke-linejoin="round"/>
+          <circle cx="80" cy="95" r="6" fill="#1a1410"/>
+          <circle cx="120" cy="95" r="6" fill="#1a1410"/>
+          <ellipse cx="100" cy="115" rx="10" ry="6" fill="#1a1410"/>
+          <polygon points="100,40 70,10 130,10" fill="#7e3bff" stroke="#1a1410" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="100" cy="10" r="6" fill="#f4a261" stroke="#1a1410" stroke-width="3"/>
+          <circle cx="65" cy="105" r="5" fill="#ff3d8b"/>
+          <circle cx="135" cy="105" r="5" fill="#ff3d8b"/>
+        </svg>
+      </div>
+      <div class="sticker-meta">
+        <div class="sticker-name">BUUUH PARTY</div>
+        <div class="sticker-price">S/ 9</div>
+      </div>
+      <div class="sticker-artist">noheart.studio</div>
+    </div>
+
+    <!-- Card 6: Pato diablo -->
+    <div class="sticker-card">
+      <div class="sticker-art">
+        <svg viewBox="0 0 200 200">
+          <ellipse cx="100" cy="130" rx="60" ry="40" fill="#f4a261" stroke="#1a1410" stroke-width="5"/>
+          <circle cx="100" cy="80" r="40" fill="#f4a261" stroke="#1a1410" stroke-width="5"/>
+          <path d="M 75 85 L 130 85 Q 145 90 130 100 L 75 100 Z" fill="#e63946" stroke="#1a1410" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="90" cy="70" r="6" fill="#1a1410"/>
+          <polygon points="80,55 75,40 88,48" fill="#e63946" stroke="#1a1410" stroke-width="3" stroke-linejoin="round"/>
+          <polygon points="115,55 110,40 122,48" fill="#e63946" stroke="#1a1410" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="sticker-meta">
+        <div class="sticker-name">PATO DIABLO</div>
+        <div class="sticker-price">S/ 8</div>
+      </div>
+      <div class="sticker-artist">limarosa.ilustra</div>
+    </div>
+
+    <!-- Card 7: Estrella con cara -->
+    <div class="sticker-card">
+      <div class="sticker-art">
+        <svg viewBox="0 0 200 200">
+          <polygon points="100,20 122,80 185,80 132,118 150,180 100,142 50,180 68,118 15,80 78,80" fill="#ff3d8b" stroke="#1a1410" stroke-width="5" stroke-linejoin="round"/>
+          <circle cx="85" cy="100" r="5" fill="#1a1410"/>
+          <circle cx="115" cy="100" r="5" fill="#1a1410"/>
+          <path d="M 80 120 Q 100 135 120 120" fill="none" stroke="#1a1410" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="75" cy="115" r="5" fill="#e63946" opacity="0.7"/>
+          <circle cx="125" cy="115" r="5" fill="#e63946" opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="sticker-meta">
+        <div class="sticker-name">ESTRELLA TÍMIDA</div>
+        <div class="sticker-price">S/ 7</div>
+      </div>
+      <div class="sticker-artist">popoarte</div>
+    </div>
+
+    <!-- Card 8: Llorando de risa -->
+    <div class="sticker-card">
+      <div class="sticker-art">
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="75" fill="#f4a261" stroke="#1a1410" stroke-width="5"/>
+          <path d="M 60 75 Q 70 60 80 75" fill="none" stroke="#1a1410" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 120 75 Q 130 60 140 75" fill="none" stroke="#1a1410" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 55 110 Q 100 165 145 110 Q 130 145 100 145 Q 70 145 55 110 Z" fill="#1a1410"/>
+          <path d="M 80 130 Q 100 145 120 130" fill="#e63946"/>
+          <path d="M 60 90 Q 50 110 55 125" fill="none" stroke="#264e8a" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 140 90 Q 150 110 145 125" fill="none" stroke="#264e8a" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="55" cy="130" r="5" fill="#264e8a"/>
+          <circle cx="145" cy="130" r="5" fill="#264e8a"/>
+        </svg>
+      </div>
+      <div class="sticker-meta">
+        <div class="sticker-name">RISA INFINITA</div>
+        <div class="sticker-price">S/ 6</div>
+      </div>
+      <div class="sticker-artist">karenchichi</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="como">
+  <div class="section-header">
+    <div>
+      <span class="section-tag" style="background:var(--mustard);color:var(--ink)">→ Cómo funciona</span>
+      <h2>Tres pasos. <em>Cero drama.</em></h2>
+    </div>
+  </div>
+  <div class="how-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Explora la galería</h3>
+      <p>Filtra por estilo, color o artista. Vas a encontrar desde caritas raras hasta animales con problemas.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Compra al toque</h3>
+      <p>Yape, Plin, tarjeta. Pagas y al instante te llega el archivo en alta resolución a tu correo.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>El crédito queda</h3>
+      <p>Cada sticker mantiene la autoría del artista original. Tú lo descargas, ellos cobran su parte.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARTIST CTA -->
+<section class="artist-cta" id="vender">
+  <svg class="ac-sticker ac-1" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="80" fill="#264e8a" stroke="#1a1410" stroke-width="6"/>
+    <circle cx="80" cy="90" r="10" fill="#fff"/>
+    <circle cx="120" cy="90" r="10" fill="#fff"/>
+    <circle cx="80" cy="90" r="5" fill="#1a1410"/>
+    <circle cx="120" cy="90" r="5" fill="#1a1410"/>
+    <path d="M 70 130 Q 100 150 130 130" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+  </svg>
+  <svg class="ac-sticker ac-2" viewBox="0 0 200 200">
+    <polygon points="100,20 130,80 195,80 145,120 165,180 100,145 35,180 55,120 5,80 70,80" fill="#e63946" stroke="#1a1410" stroke-width="6" stroke-linejoin="round"/>
+  </svg>
+
+  <h2>¿Eres artista?<br>Pega lo tuyo.</h2>
+  <p>Subes tus diseños, le ponemos vitrina, los clientes los descargan y tú te quedas con el 70% de cada venta. La autoría no se toca, el archivo es tuyo siempre.</p>
+  <a href="#" class="btn btn-primary">Quiero vender →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-brand">PEGOTE</div>
+      <p class="foot-tag">El primer marketplace de stickers ilustrados peruanos. Hecho con humor, café y deadlines flexibles.</p>
+    </div>
+    <div class="foot-col">
+      <h4>EXPLORAR</h4>
+      <a href="#">Galería</a>
+      <a href="#">Artistas</a>
+      <a href="#">Colecciones</a>
+      <a href="#">Top semanal</a>
+    </div>
+    <div class="foot-col">
+      <h4>VENDER</h4>
+      <a href="#">Cómo funciona</a>
+      <a href="#">Comisiones</a>
+      <a href="#">Subir arte</a>
+      <a href="#">Términos</a>
+    </div>
+    <div class="foot-col">
+      <h4>CONTACTO</h4>
+      <a href="#">hola@pegote.pe</a>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+      <a href="#">WhatsApp</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 PEGOTE — Lima, Perú</span>
+    <span>Hecho a mano · Pegado con cariño</span>
+  </div>
+</footer>
+
+</body>
+</html>
