@@ -57,6 +57,10 @@ export default async function ArtistPage({ params }: Props) {
                 priceCents={s.priceCents}
                 previewUrl={s.previewUrl}
                 artistUsername={s.artist.username}
+                licenseType={s.licenseType}
+                saleMode={s.saleMode}
+                currentBidCents={s.currentBidCents}
+                startBidCents={s.startBidCents}
                 index={i}
               />
             ))}

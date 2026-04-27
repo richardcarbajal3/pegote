@@ -49,7 +49,11 @@ export default async function HomePage() {
         title: s.title,
         priceCents: s.priceCents,
         previewUrl: s.previewSvg,
-        artistUsername: s.artist
+        artistUsername: s.artist,
+        licenseType: "USAGE" as const,
+        saleMode: "FIXED" as const,
+        currentBidCents: null,
+        startBidCents: null
       }))
     : data.stickers.map((s) => ({
         id: s.id,
@@ -57,7 +61,11 @@ export default async function HomePage() {
         title: s.title,
         priceCents: s.priceCents,
         previewUrl: s.previewUrl,
-        artistUsername: s.artist.username
+        artistUsername: s.artist.username,
+        licenseType: s.licenseType,
+        saleMode: s.saleMode,
+        currentBidCents: s.currentBidCents,
+        startBidCents: s.startBidCents
       }));
 
   return (
@@ -147,6 +155,10 @@ export default async function HomePage() {
               priceCents={s.priceCents}
               previewUrl={s.previewUrl}
               artistUsername={s.artistUsername}
+              licenseType={s.licenseType}
+              saleMode={s.saleMode}
+              currentBidCents={s.currentBidCents}
+              startBidCents={s.startBidCents}
               index={i}
             />
           ))}
@@ -204,10 +216,10 @@ export default async function HomePage() {
       </section>
 
       {/* ARTIST CTA */}
-      <section id="vender" className="bg-mustard border-y-2 border-ink px-6 md:px-12 py-24 text-center relative overflow-hidden">
+      <section id="vender" className="bg-mustard border-y-2 border-ink px-6 md:px-12 py-24 relative overflow-hidden">
         <svg
           viewBox="0 0 200 200"
-          className="absolute top-[15%] left-[8%] w-[90px] -rotate-[15deg] opacity-90 hidden md:block"
+          className="absolute top-[8%] left-[4%] w-[90px] -rotate-[15deg] opacity-90 hidden md:block"
         >
           <circle cx="100" cy="100" r="80" fill="#264e8a" stroke="#1a1410" strokeWidth="6" />
           <circle cx="80" cy="90" r="10" fill="#fff" />
@@ -218,7 +230,7 @@ export default async function HomePage() {
         </svg>
         <svg
           viewBox="0 0 200 200"
-          className="absolute bottom-[20%] right-[10%] w-[110px] rotate-[20deg] opacity-90 hidden md:block"
+          className="absolute bottom-[10%] right-[5%] w-[110px] rotate-[20deg] opacity-90 hidden md:block"
         >
           <polygon
             points="100,20 130,80 195,80 145,120 165,180 100,145 35,180 55,120 5,80 70,80"
@@ -229,22 +241,51 @@ export default async function HomePage() {
           />
         </svg>
 
-        <h2 className="font-display text-4xl md:text-7xl leading-[0.9] mb-6">
-          ¿Eres artista?
-          <br />
-          Pega lo tuyo.
-        </h2>
-        <p className="font-serif italic text-xl max-w-2xl mx-auto mb-10 leading-snug">
-          Subes tus diseños, le ponemos vitrina, los clientes los descargan y tú te
-          quedas con el <strong className="not-italic">70% de cada venta</strong>. La
-          autoría no se toca, el archivo es tuyo siempre.
-        </p>
-        <Link
-          href="/vender"
-          className="font-display inline-block px-10 py-5 text-lg border-2 border-ink bg-ink text-paper shadow-ink hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_var(--tomato)] transition-all"
-        >
-          Quiero vender →
-        </Link>
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="font-display text-4xl md:text-7xl leading-[0.9] mb-6">
+            Tu arte. <em className="not-italic text-tomato">Tu plata.</em>
+            <br />
+            Tu autoría.
+          </h2>
+          <p className="font-serif italic text-xl max-w-2xl mx-auto mb-12 leading-snug">
+            Subes tus diseños, le ponemos vitrina, los clientes los descargan y tú te
+            quedas con el <strong className="not-italic">70% de cada venta</strong>.
+            Vendes a <strong className="not-italic">precio fijo</strong> o lo
+            <strong className="not-italic"> subastas</strong> al mejor postor. Tú eliges
+            qué se lleva el comprador.
+          </p>
+        </div>
+
+        {/* LICENSE TYPES */}
+        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6 relative z-[2]">
+          <LicenseCard
+            dot="🟢"
+            title="Uso (no exclusivo)"
+            body="Permites que varios compren el sticker para usarlo (personal o comercial según plan). Mantienes la autoría y puedes seguir vendiéndolo; nadie puede revenderlo."
+            tint="bg-paper"
+          />
+          <LicenseCard
+            dot="🔵"
+            title="Uso exclusivo"
+            body="Vendes el diseño a un solo comprador y dejas de ofrecerlo a otros. Mantienes la autoría, pero renuncias a futuras ventas de ese diseño."
+            tint="bg-paper-2"
+          />
+          <LicenseCard
+            dot="🔴"
+            title="Transferencia total (premium)"
+            body="Vendes los derechos económicos del diseño al comprador. El cliente puede usarlo, modificarlo y revenderlo; tú conservas el crédito como autor."
+            tint="bg-paper"
+          />
+        </div>
+
+        <div className="text-center mt-12 relative z-[2]">
+          <Link
+            href="/vender"
+            className="font-display inline-block px-10 py-5 text-lg border-2 border-ink bg-ink text-paper shadow-ink hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_var(--tomato)] transition-all"
+          >
+            Quiero vender →
+          </Link>
+        </div>
       </section>
     </>
   );
@@ -253,4 +294,25 @@ export default async function HomePage() {
 function formatNumber(n: number) {
   if (n >= 1000) return `${(n / 1000).toFixed(1).replace(/\.0$/, "")}K`;
   return n.toString();
+}
+
+function LicenseCard({
+  dot,
+  title,
+  body,
+  tint
+}: {
+  dot: string;
+  title: string;
+  body: string;
+  tint: string;
+}) {
+  return (
+    <div className={`${tint} border-2 border-ink p-6 shadow-ink`}>
+      <div className="font-display text-2xl leading-tight mb-2">
+        <span className="mr-1">{dot}</span> {title}
+      </div>
+      <p className="font-serif text-base leading-snug">{body}</p>
+    </div>
+  );
 }
