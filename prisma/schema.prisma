@@ -29,6 +29,7 @@ model User {
   sessions      Session[]
   stickers      Sticker[]       @relation("StickerArtist")
   orders        Order[]         @relation("OrderBuyer")
+  bids          Bid[]           @relation("BidBidder")
 }
 
 model Account {
@@ -73,7 +74,7 @@ model Sticker {
   slug        String   @unique
   title       String
   description String?
-  // Precio en céntimos de soles (S/ 8.00 = 800)
+  // Precio en céntimos de soles (S/ 8.00 = 800). Para subasta: precio "Comprar ya" opcional.
   priceCents  Int
   // Preview público (SVG/PNG)
   previewUrl  String
@@ -83,13 +84,44 @@ model Sticker {
   published   Boolean  @default(true)
   createdAt   DateTime @default(now())
 
+  // Tipo de licencia de uso del sticker:
+  //  USAGE     → 🟢 Uso (no exclusivo). Varios compradores, autoría del artista.
+  //  EXCLUSIVE → 🔵 Uso exclusivo. Un solo comprador, sin reventas. Autoría del artista.
+  //  TRANSFER  → 🔴 Transferencia total (premium). Derechos económicos al comprador.
+  licenseType String   @default("USAGE")
+
+  // Modo de venta:
+  //  FIXED   → precio fijo
+  //  AUCTION → subasta (mejor postor antes de auctionEndsAt)
+  saleMode      String    @default("FIXED")
+  auctionEndsAt DateTime?
+  startBidCents Int?
+  currentBidCents Int?
+  currentBidderId String?
+
   artistId    String
   artist      User     @relation("StickerArtist", fields: [artistId], references: [id], onDelete: Cascade)
 
   orderItems  OrderItem[]
+  bids        Bid[]
 
   @@index([artistId])
   @@index([published])
+  @@index([saleMode])
+}
+
+model Bid {
+  id         String   @id @default(cuid())
+  stickerId  String
+  bidderId   String
+  amountCents Int
+  createdAt  DateTime @default(now())
+
+  sticker    Sticker  @relation(fields: [stickerId], references: [id], onDelete: Cascade)
+  bidder     User     @relation("BidBidder", fields: [bidderId], references: [id], onDelete: Cascade)
+
+  @@index([stickerId])
+  @@index([bidderId])
 }
 
 model Order {
