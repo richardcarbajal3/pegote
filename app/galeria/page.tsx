@@ -26,13 +26,13 @@ export default async function GaleriaPage({
         ...(q
           ? {
               OR: [
-                { title: { contains: q } },
-                { description: { contains: q } },
-                { tags: { contains: q } }
+                { title: { contains: q, mode: "insensitive" } },
+                { description: { contains: q, mode: "insensitive" } },
+                { tags: { contains: q, mode: "insensitive" } }
               ]
             }
           : {}),
-        ...(tag ? { tags: { contains: tag } } : {})
+        ...(tag ? { tags: { contains: tag, mode: "insensitive" } } : {})
       },
       include: { artist: { select: { username: true } } },
       orderBy: { createdAt: "desc" }

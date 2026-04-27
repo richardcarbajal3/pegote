@@ -9,7 +9,7 @@ Bungee + Fraunces + DM Mono).
 
 - **Next.js 14** (App Router) + TypeScript
 - **Tailwind CSS** para estilos
-- **Prisma** + SQLite (dev) / Postgres (prod)
+- **Prisma** + Postgres (Neon en prod)
 - **Auth.js v5** con login de Google
 - API routes para upload, checkout y download
 - Sin dependencias externas para pagos todavía: el checkout está mockeado

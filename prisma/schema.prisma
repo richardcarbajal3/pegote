@@ -1,12 +1,12 @@
 // PEGOTE — schema de base de datos
-// SQLite para dev (cambiar a postgresql en prod)
+// Postgres (Neon en prod, Postgres local o Neon branch en dev)
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
