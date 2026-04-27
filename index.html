@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PEGOTE — marketplace de stickers de artistas</title>
+  <meta name="description" content="PEGOTE es el marketplace donde los artistas suben sus stickers y los clientes los compran. La autoría siempre queda con quien lo dibujó." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Stickers decorativos sueltos por toda la página -->
+  <div class="floating-stickers" aria-hidden="true">
+    <svg class="sticker s1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#FFD93D" stroke="#1a1a1a" stroke-width="4"/><circle cx="35" cy="40" r="5" fill="#1a1a1a"/><circle cx="65" cy="40" r="5" fill="#1a1a1a"/><path d="M30 60 Q50 78 70 60" stroke="#1a1a1a" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+    <svg class="sticker s2" viewBox="0 0 100 100"><path d="M50 15 L61 40 L88 42 L67 60 L75 88 L50 72 L25 88 L33 60 L12 42 L39 40 Z" fill="#FF4D6D" stroke="#1a1a1a" stroke-width="4" stroke-linejoin="round"/></svg>
+    <svg class="sticker s3" viewBox="0 0 100 100"><path d="M50 85 C 20 65, 10 35, 30 22 C 42 14, 50 25, 50 30 C 50 25, 58 14, 70 22 C 90 35, 80 65, 50 85 Z" fill="#5B8DEF" stroke="#1a1a1a" stroke-width="4" stroke-linejoin="round"/></svg>
+    <svg class="sticker s4" viewBox="0 0 100 100"><polygon points="50,10 90,90 10,90" fill="#7CD992" stroke="#1a1a1a" stroke-width="4" stroke-linejoin="round"/><circle cx="50" cy="65" r="8" fill="#1a1a1a"/></svg>
+    <svg class="sticker s5" viewBox="0 0 100 100"><path d="M20 50 Q50 10 80 50 Q50 90 20 50 Z" fill="#FF8C42" stroke="#1a1a1a" stroke-width="4"/><circle cx="50" cy="50" r="10" fill="#1a1a1a"/></svg>
+    <svg class="sticker s6" viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="12" fill="#C77DFF" stroke="#1a1a1a" stroke-width="4"/><text x="50" y="62" text-anchor="middle" font-family="Bungee" font-size="32" fill="#1a1a1a">!</text></svg>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark">P</span>
+      <span class="logo-text">PEGOTE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#como-funciona">Cómo funciona</a></li>
+      <li><a href="#artistas">Para artistas</a></li>
+    </ul>
+    <a href="#artistas" class="btn btn-ghost">Vender mi arte</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-tag">marketplace de stickers · hecho por artistas</div>
+    <h1 class="hero-title">
+      <span class="word w1">Pega</span>
+      <span class="word w2">arte</span>
+      <span class="word w3">en</span>
+      <span class="word w4">todo</span>
+      <span class="word w5">lo&nbsp;que</span>
+      <span class="word w6">tienes.</span>
+    </h1>
+    <p class="hero-sub">
+      Stickers únicos, dibujados por artistas reales. Los compras, los pegas, los presumes.
+      La autoría queda con quien lo dibujó. Siempre.
+    </p>
+    <div class="hero-cta">
+      <a href="#galeria" class="btn btn-primary">Ver la galería</a>
+      <a href="#artistas" class="btn btn-secondary">Soy artista, quiero vender</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>+200</strong><span>diseños únicos</span></div>
+      <div><strong>+45</strong><span>artistas</span></div>
+      <div><strong>70%</strong><span>se queda el artista</span></div>
+    </div>
+  </header>
+
+  <!-- GALERÍA -->
+  <section id="galeria" class="gallery-section">
+    <div class="section-head">
+      <span class="kicker">— la galería —</span>
+      <h2>Stickers que no vas a ver en otro lado</h2>
+      <p>Cada uno tiene firma. Pasa el cursor (o tócalos) para ver al artista.</p>
+    </div>
+
+    <div class="gallery">
+      <article class="card" style="--bg:#FFD93D;--rot:-3deg">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="#FF4D6D" stroke="#1a1a1a" stroke-width="6"/><circle cx="75" cy="85" r="10" fill="#fff"/><circle cx="125" cy="85" r="10" fill="#fff"/><circle cx="75" cy="85" r="5" fill="#1a1a1a"/><circle cx="125" cy="85" r="5" fill="#1a1a1a"/><path d="M65 130 Q100 160 135 130" stroke="#1a1a1a" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M40 60 L60 75 M160 60 L140 75" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="card-info">
+          <h3>Payaso Triste</h3>
+          <span class="artist">@kuro.draws</span>
+          <span class="price">S/ 4</span>
+        </div>
+      </article>
+
+      <article class="card" style="--bg:#7CD992;--rot:2deg">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><path d="M100 30 L100 170 M30 100 L170 100" stroke="#1a1a1a" stroke-width="6" stroke-linecap="round"/><circle cx="100" cy="100" r="35" fill="#FFD93D" stroke="#1a1a1a" stroke-width="6"/><circle cx="100" cy="100" r="12" fill="#1a1a1a"/></svg>
+        </div>
+        <div class="card-info">
+          <h3>Ojo Estrella</h3>
+          <span class="artist">@ines.tinta</span>
+          <span class="price">S/ 5</span>
+        </div>
+      </article>
+
+      <article class="card" style="--bg:#5B8DEF;--rot:-1deg">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><path d="M100 160 C 40 130, 30 80, 60 55 C 80 40, 100 60, 100 70 C 100 60, 120 40, 140 55 C 170 80, 160 130, 100 160 Z" fill="#FF4D6D" stroke="#1a1a1a" stroke-width="6" stroke-linejoin="round"/><path d="M75 80 Q85 75 90 85" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <div class="card-info">
+          <h3>Corazón Roto (pero feliz)</h3>
+          <span class="artist">@maca.studio</span>
+          <span class="price">S/ 4</span>
+        </div>
+      </article>
+
+      <article class="card" style="--bg:#C77DFF;--rot:3deg">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="60" fill="#FFD93D" stroke="#1a1a1a" stroke-width="6"/><path d="M50 80 Q100 30 150 80" stroke="#1a1a1a" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="75" cy="110" r="6" fill="#1a1a1a"/><circle cx="125" cy="110" r="6" fill="#1a1a1a"/><path d="M85 135 L100 145 L115 135" stroke="#1a1a1a" stroke-width="6" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <div class="card-info">
+          <h3>Sol Cansado</h3>
+          <span class="artist">@joaco.png</span>
+          <span class="price">S/ 6</span>
+        </div>
+      </article>
+
+      <article class="card" style="--bg:#FF8C42;--rot:-2deg">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><polygon points="100,30 120,80 175,85 132,120 145,175 100,145 55,175 68,120 25,85 80,80" fill="#FFD93D" stroke="#1a1a1a" stroke-width="6" stroke-linejoin="round"/><circle cx="85" cy="100" r="6" fill="#1a1a1a"/><circle cx="115" cy="100" r="6" fill="#1a1a1a"/><path d="M85 125 Q100 135 115 125" stroke="#1a1a1a" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <div class="card-info">
+          <h3>Estrella Coqueta</h3>
+          <span class="artist">@dani.glitch</span>
+          <span class="price">S/ 5</span>
+        </div>
+      </article>
+
+      <article class="card" style="--bg:#FF4D6D;--rot:1deg">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><rect x="40" y="60" width="120" height="90" rx="10" fill="#fff" stroke="#1a1a1a" stroke-width="6"/><path d="M40 90 L100 130 L160 90" fill="none" stroke="#1a1a1a" stroke-width="6" stroke-linejoin="round"/><path d="M70 40 Q100 10 130 40" stroke="#1a1a1a" stroke-width="6" fill="none"/></svg>
+        </div>
+        <div class="card-info">
+          <h3>Carta Perdida</h3>
+          <span class="artist">@vero.lapiz</span>
+          <span class="price">S/ 4</span>
+        </div>
+      </article>
+
+      <article class="card" style="--bg:#1a1a1a;--rot:-2deg;color:#fff">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><path d="M100 30 L130 90 L170 100 L130 110 L100 170 L70 110 L30 100 L70 90 Z" fill="#FFD93D" stroke="#fff" stroke-width="6" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="card-info">
+          <h3>Cometa</h3>
+          <span class="artist">@nox.draws</span>
+          <span class="price">S/ 7</span>
+        </div>
+      </article>
+
+      <article class="card" style="--bg:#FFD93D;--rot:2deg">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><path d="M50 100 Q50 50 100 50 Q150 50 150 100 L150 140 Q150 160 130 160 L70 160 Q50 160 50 140 Z" fill="#5B8DEF" stroke="#1a1a1a" stroke-width="6" stroke-linejoin="round"/><circle cx="80" cy="95" r="8" fill="#fff"/><circle cx="120" cy="95" r="8" fill="#fff"/><circle cx="80" cy="95" r="4" fill="#1a1a1a"/><circle cx="120" cy="95" r="4" fill="#1a1a1a"/><path d="M85 125 L115 125" stroke="#1a1a1a" stroke-width="6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="card-info">
+          <h3>Fantasmita</h3>
+          <span class="artist">@piero.crayon</span>
+          <span class="price">S/ 4</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="gallery-cta">
+      <a href="#" class="btn btn-primary">Ver los +200 diseños →</a>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section id="como-funciona" class="how">
+    <div class="section-head light">
+      <span class="kicker">— cómo funciona —</span>
+      <h2>Tres pasos, cero misterio</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>Eliges tu sticker</h3>
+        <p>Buscas en la galería, filtras por estilo, encuentras al artista que te late. Miras el preview, lo agregas al carrito.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>Pagas por Yape, Plin o tarjeta</h3>
+        <p>Pago directo, sin vueltas. Recibes tu archivo digital al instante o tu sticker físico impreso en 2-3 días.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>El crédito queda</h3>
+        <p>Cada sticker viene con la firma del artista que lo creó. Tú lo usas, ellos siguen siendo los autores. Así de simple.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA ARTISTAS -->
+  <section id="artistas" class="artists">
+    <div class="artists-grid">
+      <div class="artists-text">
+        <span class="kicker">— para artistas —</span>
+        <h2>La autoría no se toca. <span class="hl">El archivo es tuyo. Siempre.</span></h2>
+        <p class="lead">
+          PEGOTE es la plataforma. Tú haces el arte. Nosotros nos encargamos de que llegue
+          a quien lo va a apreciar — sin tocar tu autoría, sin reclamar tus diseños, sin
+          contratos raros.
+        </p>
+        <ul class="bullets">
+          <li><strong>70%</strong> de cada venta es tuyo. Sin letra chica.</li>
+          <li>Tu nombre y tu @ aparecen en cada sticker que vendas.</li>
+          <li>Subes tu PNG o SVG, le pones precio, listo.</li>
+          <li>Te puedes ir cuando quieras. Tu arte se va contigo.</li>
+        </ul>
+        <a href="#" class="btn btn-primary big">Empieza a vender tu arte →</a>
+      </div>
+      <div class="artists-visual">
+        <div class="proof-card" style="--rot:-4deg">
+          <div class="proof-avatar" style="background:#FF4D6D">K</div>
+          <div>
+            <strong>@kuro.draws</strong>
+            <span>S/ 1,240 este mes</span>
+          </div>
+        </div>
+        <div class="proof-card" style="--rot:3deg">
+          <div class="proof-avatar" style="background:#5B8DEF">I</div>
+          <div>
+            <strong>@ines.tinta</strong>
+            <span>S/ 890 este mes</span>
+          </div>
+        </div>
+        <div class="proof-card" style="--rot:-2deg">
+          <div class="proof-avatar" style="background:#7CD992">M</div>
+          <div>
+            <strong>@maca.studio</strong>
+            <span>S/ 2,100 este mes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="final-cta">
+    <h2>¿Listo para pegar arte<br/>en todo lo que tienes?</h2>
+    <div class="hero-cta">
+      <a href="#galeria" class="btn btn-primary big">Comprar stickers</a>
+      <a href="#artistas" class="btn btn-secondary big">Vender mi arte</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="logo">
+          <span class="logo-mark">P</span>
+          <span class="logo-text">PEGOTE</span>
+        </a>
+        <p class="footer-tag">Stickers de artistas reales. La autoría no se mueve.</p>
+      </div>
+      <div>
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#">Más vendidos</a></li>
+          <li><a href="#">Nuevos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Artistas</h4>
+        <ul>
+          <li><a href="#artistas">Vender mi arte</a></li>
+          <li><a href="#">Términos justos</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PEGOTE. Cada sticker pertenece a su artista.</span>
+    </div>
+  </footer>
+</body>
+</html>
